@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: test
+spec:
+  resources:
+    inputs:
+      - name: repo
+        type: git
+  steps:
+    - name: run-test
+      image: ruby:1.14-alpine
+      workingDir: /workspace/repo/src
+      command: ["rspec"]
+      args: ["-f doc"]
